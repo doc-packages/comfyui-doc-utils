@@ -47,7 +47,7 @@ class DOC_SaveImageAndAddToHistory:
 
     OUTPUT_NODE = True
 
-    CATEGORY = "image"
+    CATEGORY = "DOC"
     DESCRIPTION = "Saves the input images to your ComfyUI output directory and store prompt-image mapping in a global history file."
 
     def save_images(self, images, filename_prefix="ComfyUI", llm_prompt=None, final_prompt=None, steps=None, cfg=None, prompt=None, extra_pnginfo=None):

@@ -1,4 +1,4 @@
-from nodes.prompts import DOC_SaveImageAndAddToHistory
+from nodes.Prompts import DOC_SaveImageAndAddToHistory
 
 
 # A dictionary that contains all nodes you want to export with their names
