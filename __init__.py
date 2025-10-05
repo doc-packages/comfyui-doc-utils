@@ -4,7 +4,7 @@ from nodes.prompts import DOC_SaveImageAndAddToHistory
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
 NODE_CLASS_MAPPINGS = {
-    "DOC_Timestamp": DOC_SaveImageAndAddToHistory,
+    "DOC_SaveImageAndAddToHistory": DOC_SaveImageAndAddToHistory,
 }
 
 # This magic will use a property DISPLAY_NAME on each node to get the display name of the node for the UI
