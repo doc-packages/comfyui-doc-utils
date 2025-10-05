@@ -8,12 +8,23 @@ from comfy.cli_args import args
 import numpy as np
        
 
+
 class DOC_SaveImageAndAddToHistory:
     def __init__(self):
         self.output_dir = folder_paths.get_output_directory()
         self.type = "output"
         self.prefix_append = ""
         self.compress_level = 4
+        self.history_filename = "generation_history.jsonl"
+
+    def _get_history_path(self):
+        return os.path.join(self.output_dir, self.history_filename)
+
+    def _append_history(self, entry):
+        history_path = self._get_history_path()
+        # Crea il file se non esiste
+        with open(history_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
     @classmethod
     def INPUT_TYPES(s):
@@ -39,7 +50,7 @@ class DOC_SaveImageAndAddToHistory:
     CATEGORY = "image"
     DESCRIPTION = "Saves the input images to your ComfyUI output directory and store prompt-image mapping in a global history file."
 
-    def save_images(self, images, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None):
+    def save_images(self, images, filename_prefix="ComfyUI", llm_prompt=None, final_prompt=None, steps=None, cfg=None, prompt=None, extra_pnginfo=None):
         filename_prefix += self.prefix_append
         full_output_folder, filename, counter, subfolder, filename_prefix = folder_paths.get_save_image_path(filename_prefix, self.output_dir, images[0].shape[1], images[0].shape[0])
         results = list()
@@ -57,12 +68,23 @@ class DOC_SaveImageAndAddToHistory:
 
             filename_with_batch_num = filename.replace("%batch_num%", str(batch_number))
             file = f"{filename_with_batch_num}_{counter:05}_.png"
-            img.save(os.path.join(full_output_folder, file), pnginfo=metadata, compress_level=self.compress_level)
+            file_path = os.path.join(full_output_folder, file)
+            img.save(file_path, pnginfo=metadata, compress_level=self.compress_level)
             results.append({
                 "filename": file,
                 "subfolder": subfolder,
                 "type": self.type
             })
+
+            # Scrivi la riga di history
+            history_entry = {
+                "path": os.path.abspath(file_path),
+                "llm_prompt": llm_prompt,
+                "final_prompt": final_prompt,
+                "steps": steps,
+                "cfg": cfg
+            }
+            self._append_history(history_entry)
             counter += 1
 
         return { "ui": { "images": results } }
