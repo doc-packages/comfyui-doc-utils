@@ -44,6 +44,7 @@ class DOC_SaveImageAndAddToHistory:
 
     RETURN_TYPES = ()
     FUNCTION = "save_images"
+    DISPLAY_NAME = "Save Image and Add to History"
 
     OUTPUT_NODE = True
 
