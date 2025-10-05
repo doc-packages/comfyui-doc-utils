@@ -1,0 +1,20 @@
+
+[project]
+name="doc-utils"
+authors = [
+    {name = "Francesco Bellini", email = "doc.open.dev@gmail.com"}
+]
+version="0.0.1"
+description="Useful tool for Doc to use"
+license={file = "LICENSE"}
+keywords=["promtpt", "save", "history"]
+requires-python=">=3.8"
+classifiers = [
+]
+dependencies = [
+]
+
+
+[project.urls]
+bugs = "https://gitea.psichedelico.com/ComfyUI/doc-nodes/issues"
+homepage = "https://gitea.psichedelico.com/ComfyUI/doc-nodes"
