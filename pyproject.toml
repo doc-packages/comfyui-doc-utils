@@ -18,3 +18,8 @@ dependencies = [
 [project.urls]
 bugs = "https://gitea.psichedelico.com/ComfyUI/doc-nodes/issues"
 homepage = "https://gitea.psichedelico.com/ComfyUI/doc-nodes"
+
+[tool.comfy]
+PublisherId = "doc"
+DisplayName = "doc-utils"
+Icon = ""
