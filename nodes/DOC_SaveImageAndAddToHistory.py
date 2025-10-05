@@ -36,6 +36,7 @@ class DOC_SaveImageAndAddToHistory:
                 "final_prompt": ("STRING", {"default": "Drag the final prompt here...", "tooltip": "The text prompt used to generate the image."}),
                 "steps": ("INT", {"default": 30, "tooltip": "The number of steps used to generate the image."}),
                 "cfg": ("FLOAT", {"default": 3.5, "tooltip": "The CFG scale used to guide the image generation."}),
+                "model_name": ("STRING", {"default": "Write the model name", "tooltip": "The name of the model used to generate the image."}),
             },
             "hidden": {
                 "prompt": "PROMPT", "extra_pnginfo": "EXTRA_PNGINFO"
@@ -51,7 +52,7 @@ class DOC_SaveImageAndAddToHistory:
     CATEGORY = "DOC"
     DESCRIPTION = "Saves the input images to your ComfyUI output directory and store prompt-image mapping in a global history file."
 
-    def save_images(self, images, filename_prefix="ComfyUI", llm_prompt=None, final_prompt=None, steps=None, cfg=None, prompt=None, extra_pnginfo=None):
+    def save_images(self, images, filename_prefix="ComfyUI", llm_prompt=None, final_prompt=None, steps=None, cfg=None, model_name=None, prompt=None, extra_pnginfo=None):
         filename_prefix += self.prefix_append
         full_output_folder, filename, counter, subfolder, filename_prefix = folder_paths.get_save_image_path(filename_prefix, self.output_dir, images[0].shape[1], images[0].shape[0])
         results = list()
@@ -83,7 +84,11 @@ class DOC_SaveImageAndAddToHistory:
                 "llm_prompt": llm_prompt,
                 "final_prompt": final_prompt,
                 "steps": steps,
-                "cfg": cfg
+                "cfg": cfg,
+                "rating": -1,
+                "comment": "",
+                "model_name": model_name,
+                "timestamp": int(os.path.getmtime(file_path)),
             }
             self._append_history(history_entry)
             counter += 1
