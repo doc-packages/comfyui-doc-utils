@@ -6,7 +6,6 @@ authors = [
 ]
 version="0.0.1"
 description="Useful tool for Doc to use"
-license={file = "LICENSE"}
 keywords=["promtpt", "save", "history"]
 requires-python=">=3.8"
 classifiers = [
