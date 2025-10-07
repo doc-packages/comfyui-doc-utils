@@ -9,7 +9,8 @@ class DOC_RandomPromptChoice:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                **{f"prompt_{i+1}": ("STRING", {"default": "", "tooltip": f"Prompt {i+1}"}) for i in range(20)}
+                **{f"prompt_{i+1}": ("STRING", {"default": "", "tooltip": f"Prompt {i+1}"}) for i in range(20)},
+                "seed": ("INT", {"default": datetime.datetime.now().timestamp(), "tooltip": "The seed for random number generation."}),
             }
         }
 
@@ -19,11 +20,11 @@ class DOC_RandomPromptChoice:
     CATEGORY = "DOC"
     DISPLAY_NAME = "Random Prompt Choice"
 
-    def choose_random_prompt(self, **kwargs):
+    def choose_random_prompt(self, seed, **kwargs):
         prompts = [v for v in kwargs.values() if v.strip()]
         if not prompts:
             return ("",)
         sysrand = random.SystemRandom()
-        sysrand.seed(datetime.datetime.now().timestamp()) 
+        sysrand.seed(seed)
         choice = sysrand.choice(prompts)
         return (choice,)
