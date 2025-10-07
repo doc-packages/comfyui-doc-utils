@@ -1,3 +1,4 @@
+import datetime
 import random
 
 class DOC_RandomPromptChoice:
@@ -23,7 +24,6 @@ class DOC_RandomPromptChoice:
         if not prompts:
             return ("",)
         sysrand = random.SystemRandom()
+        sysrand.seed(datetime.datetime.now().timestamp()) 
         choice = sysrand.choice(prompts)
-        idx = prompts.index(choice) + 1
-        print(f"[DOC_RandomPromptChoice] Scelta #{idx}: '{choice[:20]}'")
         return (choice,)
