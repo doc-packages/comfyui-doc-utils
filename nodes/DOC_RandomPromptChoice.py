@@ -15,7 +15,7 @@ class DOC_RandomPromptChoice:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("selected_prompt",)
     FUNCTION = "choose_random_prompt"
-    CATEGORY = "DOC Utils"
+    CATEGORY = "DOC"
     DISPLAY_NAME = "Random Prompt Choice"
 
     def choose_random_prompt(self, **kwargs):
