@@ -22,7 +22,8 @@ class DOC_RandomPromptChoice:
         prompts = [v for v in kwargs.values() if v.strip()]
         if not prompts:
             return ("",)
-        choice = random.choice(prompts)
+        sysrand = random.SystemRandom()
+        choice = sysrand.choice(prompts)
         idx = prompts.index(choice) + 1
         print(f"[DOC_RandomPromptChoice] Scelta #{idx}: '{choice[:20]}'")
         return (choice,)
