@@ -15,8 +15,7 @@ dependencies = [
 
 
 [project.urls]
-bugs = "https://gitea.psichedelico.com/ComfyUI/doc-nodes/issues"
-homepage = "https://gitea.psichedelico.com/ComfyUI/doc-nodes"
+Repository = "https://github.com/doc-packages/comfyui-doc-utils"
 
 [tool.comfy]
 PublisherId = "doc"
